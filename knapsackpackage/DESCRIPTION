@@ -1,10 +1,13 @@
 Package: knapsackpackage
 Type: Package
-Title: What the package does (short line)
-Version: 1.0
+Title: The package contains three different functions for solving the kapsack problem.
+Version: 0.0.1
 Date: 2015-10-01
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
-Suggests: testthat
+Author: Camilla and Trung
+Maintainer: Camilla Skoglund <camgu844@student.liu.se>
+Description: The knapsack problem is a discrete optimization problem where we have a knapsack that can take a limited weight and we want to fill this knapsack with a number of items, each with a weight and a value. The goal is to find the knapsack with the largest value of the elements added to the knapsack.
+License: GPL-2
+Suggests: testthat,
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
