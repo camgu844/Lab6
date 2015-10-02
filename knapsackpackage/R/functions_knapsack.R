@@ -11,7 +11,7 @@ knapsack_objects <-
 #' Brute force search. A function that takes a data frame and returns the maximum knapsack value.
 #' @param x data.frame
 #' @param W numeric value
-#' @return max numeric value
+#' @return m list
 
 knapsack_brute_force <- function (x, W){
 
@@ -23,25 +23,33 @@ knapsack_brute_force <- function (x, W){
   stopifnot(class(W) == "numeric")
  
   # tests all different combinations using a binary representation
-  for ( i in 1:2^n){
-  v <- intToBits(i)
- 
-  #will work more here!!!
-  print(v)
-  print(one <- v[]==1)
-  print(one[[]])
-  print(max(v))
+  best_value <- 0
+  best_element <- 0
+  n <- length(x$w)
+  print(n)
+  for ( i in seq(2^n-1)){
+    b <- (intToBits(i)==1)
+    #check if objects fits into the knapsack 
+    if (sum(x$w[b])<= W){
+      #check if value is better than previous best value  
+      if (sum(x$v[b]) > best_value) {
+        best_value <- sum(x$v[b])
+        best_element <- i
+      }
+    }
   }
+  m <- list()
+  m$value <- best_value
+  m$elements <- (1:32)[intToBits(best_element)==1]
   
-  max <- max()
-  return(max)
+  return(m)
 }
 
 
 #' Dynamic programming. Creates an algorithm that can solve the knapsack problem exact by iterating over all possible values of w.
 #' @param x data.frame
 #' @param W numeric value
-#' @return m numeric value
+#' @return out list
 
 knapsack_dynamic <- function (x, W){
   
@@ -52,18 +60,14 @@ knapsack_dynamic <- function (x, W){
   stopifnot((x$w > 0) & (x$v >0))
   stopifnot(class(W) == "numeric")
   
+  n <- length(x$w)
   
   # iterates over all possible values of w
-  #will work more here!!!
-  m <- matrix()
-  for (j in 0:W){
-    m[0, j] <- 0
-  }
-  
-  for (i in 1:n){
-    for (j in 0:W){
-      if (w[i] <= j) {
-        m[i, j] <- max(m[i-1, j], m[i-1, j-w[i]] + v[i])
+  m <- matrix(0,nrow = n+1, ncol = W+1, byrow=TRUE)
+  for (i in 2:(n+1)){
+    for (j in 1:(W+1)){
+      if (x$w[i-1] <= (j-1)) {
+        m[i, j] <- max(m[i-1, j], m[i-1, j-x$w[i-1]] + x$v[i-1])
       }
       else {
         m[i, j] <- m[i-1, j]
@@ -71,35 +75,37 @@ knapsack_dynamic <- function (x, W){
     }
   }
   
-  return(m)
+  # to get the result 
+  value <- max(m)
+  out <- list()
+  out$value <- round(value)
+  length_mat <- length(m[,1])
+  width_mat <- length(m[1,])
   
+  #repeat until we have found all objects in the optimal solution
+  i <- 1
+  while(value>0)
+  {
+    #test if removing object length_j reduces value for the optimal solution
+    if(m[length_mat-1,width_mat]<value){
+      #if so, reduce remaining value and weight
+      value <- value - x$v[length_mat-1]
+      width_mat <- width_mat - x$w[length_mat-1]
+      out$elements[i] <- length_mat-1
+      i <- i+1
+    }
+    length_mat <- length_mat-1
+  }
+  out$elements <- sort(out$elements)
+  return(out)
 }
 
-if (FALSE){
-  pseudo code for the dynamic program:
-  
-  1 // Input:
-  2 // Values (stored in array v)
-  3 // Weights (stored in array w)
-  4 // Number of distinct items (n)
-  5 // Knapsack capacity (W)
-  6 
-  7 for j from 0 to W do:
-  8     m[0, j] := 0
-  9 
-  10 for i from 1 to n do:
-  11     for j from 0 to W do:
-  12         if w[i] <= j then:
-  13             m[i, j] := max(m[i-1, j], m[i-1, j-w[i]] + v[i])
-  14         else:
-  15             m[i, j] := m[i-1, j]
-}
 
 
 #' Greedy heuristic. This algorithm gives an approximation of the result, which will reduce the computional complexity considerably.
 #' @param x data.frame
 #' @param W numeric value
-#' @return max numeric value
+#' @return max numeric list
 
 greedy_knapsack <- function (x, W){
   

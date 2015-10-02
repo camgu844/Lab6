@@ -17,9 +17,9 @@ test_that((colnames(x[1]) == "w") & (colnames(x[2]) == "v"))
 test_that(length(colnames(x)) == 2)
 test_that((x$w > 0) & (x$v >0))
 test_that(class(W) == "numeric")
-test_that(class(knapsack_brute_force(x, W)) == "numeric")
-test_that(class(knapsack_dynamic(x, W)) == "numeric")
-test_that(class(greedy_knapsack(x, W)) == "numeric")
+test_that(class(knapsack_brute_force(x, W)) == "list")
+test_that(class(knapsack_dynamic(x, W)) == "list")
+test_that(class(greedy_knapsack(x, W)) == "list")
 
 
 #tests that output is correct
