@@ -26,8 +26,7 @@ knapsack_brute_force <- function (x, W){
   best_value <- 0
   best_element <- 0
   n <- length(x$w)
-  print(n)
-  for ( i in seq(2^n-1)){
+  for ( i in 1:(2^n-1)){
     b <- (intToBits(i)==1)
     #check if objects fits into the knapsack 
     if (sum(x$w[b])<= W){
@@ -39,7 +38,7 @@ knapsack_brute_force <- function (x, W){
     }
   }
   m <- list()
-  m$value <- best_value
+  m$value <- round(best_value)
   m$elements <- (1:32)[intToBits(best_element)==1]
   
   return(m)
