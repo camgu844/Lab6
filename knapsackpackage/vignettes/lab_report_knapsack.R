@@ -1,50 +1,26 @@
----
-title: "lab_report_knapsack"
-author: "Camilla and Trung"
-date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{lab_report_knapsack}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
----
-
-## Functions
-```{r}
+## ------------------------------------------------------------------------
 library(knapsackpackage)
 library(Rcpp)
-```
 
-
-## Answers
-
-### 1.1.2 How long time does it take to run the brute force algorithm for n=16 objects?
-```{r}
+## ------------------------------------------------------------------------
 t = proc.time()
 tmp = knapsack_brute_force(knapsack_objects[1:16,], 5000)
 print(paste('Processing time:',proc.time()-t,' seconds'))
-```
 
-### 1.1.3 How long time does it take to run the dynamic algorithm for n=500 objects?
-```{r}
+## ------------------------------------------------------------------------
 t = proc.time()
 tmp = knapsack_dynamic(knapsack_objects[1:500,], 5000)
 print(paste('Processing time:',proc.time()-t,' seconds'))
-```
 
-### 1.1.4 How long time does it take to run the greedy algorithm for n=1000000 objects?
-```{r}
+## ------------------------------------------------------------------------
 tmp = generate_knapsack_obj(1000000)
 t = proc.time()
 tmp1 = knapsack_greedy(tmp, 5000)
 print(paste('Processing time:',proc.time()-t,' seconds'))
-```
 
-### 1.1.6 How large performance gain could you get by trying to improve your code?
-
-```{r}
+## ------------------------------------------------------------------------
 print('Original knapsack dynamic:')
 print(system.time(knapsack_dynamic(knapsack_objects[1:500,], 5000)))
 print('Optimized knapsack dynamic:')
 print(system.time(knapsack_dynamic_optimized(knapsack_objects[1:500,], 5000)))
-```
+
