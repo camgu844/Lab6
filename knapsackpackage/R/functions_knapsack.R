@@ -4,8 +4,8 @@ set.seed(42)
 n <- 2000
 knapsack_objects <-
   data.frame(
-    w=sample(1:4000, size=n, replace=TRUE),
-    v=runif(n=n, 0, 10000)
+    w=abs(sample(1:4000, size=n, replace=TRUE)),
+    v=abs(runif(n=n, 0, 10000))
   )
 
 generate_knapsack_obj = function(n){
@@ -201,13 +201,12 @@ knapsack_greedy <- function (x, W){
 
 ################################################################################
 ################################# Some tests ###################################
-tmp = knapsack_dynamic(knapsack_objects[1:500,],5000)
-print(tmp)
-tmp1 = knapsack_dynamic_optimized(knapsack_objects[1:500,],5000)
-print(tmp1)
-
-print(system.time(knapsack_dynamic(knapsack_objects[1:50,],5000)))
-print(system.time(knapsack_dynamic_optimized(knapsack_objects[1:500,],5000)))
+# tmp = knapsack_dynamic(knapsack_objects[1:500,],5000)
+# print(tmp)
+# tmp1 = knapsack_dynamic_optimized(knapsack_objects[1:500,],5000)
+# print(tmp1)
+# print(system.time(knapsack_dynamic(knapsack_objects[1:500,],5000)))
+# print(system.time(knapsack_dynamic_optimized(knapsack_objects[1:500,],5000)))
 
 # tmp = generate_knapsack_obj(16)
 # t = proc.time()
