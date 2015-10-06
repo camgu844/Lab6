@@ -1,1 +1,3 @@
+useDynLib(knapsackpackage)
 exportPattern("^[[:alpha:]]+")
+importFrom(Rcpp, evalCpp)

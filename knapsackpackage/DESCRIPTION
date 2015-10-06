@@ -9,6 +9,7 @@ Description: The knapsack problem is a discrete optimization problem where we ha
 License: GPL-2
 Suggests: testthat,
     knitr,
-    rmarkdown,
-    Rcpp
+    rmarkdown
 VignetteBuilder: knitr
+Imports: Rcpp (>= 0.12.1)
+LinkingTo: Rcpp
