@@ -13,29 +13,37 @@ x <- knapsack_objects[1:10,]
 W <- 3500
 
 #tests that input and output is of correct class, and that the variables and values in data.frame are correct.
-test_that('Test1', class(x) == "data.frame")
-test_that('Test2', (colnames(x[1]) == "w") & (colnames(x[2]) == "v"))
-test_that('Test3', length(colnames(x)) == 2)
-test_that('Test4', (x$w > 0) & (x$v >0))
-test_that('Test5', class(W) == "numeric")
-test_that('Test6', class(knapsack_brute_force(x, W)) == "list")
-test_that('Test7', class(knapsack_dynamic(x, W)) == "list")
-test_that('Test8', class(knapsack_greedy(x, W)) == "list")
+test_that("input and output is of correct class etc",{
+  expect_that(class(x), equals ("data.frame"))
+  expect_that(colnames(x[1]), equals ("w"))
+  expect_that(colnames(x[2]), equals ("v"))
+  expect_that(length(colnames(x)), equals (2))
+  expect_more_than(x$w , 0)
+  expect_more_than(x$v , 0)
+  expect_that(class(W), equals ("numeric"))
+  expect_that(class(knapsack_brute_force(x, W)), equals ("list"))
+  expect_that(class(knapsack_dynamic(x, W)), equals ("list"))
+  expect_that(class(knapsack_greedy(x, W)), equals ("list"))
+  })
 
 
-#tests that output is correct
 kbf <- knapsack_brute_force(knapsack_objects[1:8,], 3500)
 kd <- knapsack_dynamic(knapsack_objects[1:8,], 3500)
 gk <- knapsack_greedy(knapsack_objects[1:800,], 3500)
 
-test_that('Test9',kbf$value == 16770)
-test_that('Test10',kbf$elements == c(5, 8))
-test_that('Test11',kd$value == 16770)
-test_that('Test12',kd$elements == c(5, 8))
-test_that('Test13',gk$value == 192647)
-test_that('Test14',head(gk$elements) == c(92, 574, 472, 80, 110, 537))
+test_that("output is correct",{
+  expect_that(kbf$value, equals (16770))
+  expect_that(kbf$elements, equals (c(5, 8)))
+  expect_that(kd$value, equals (16770))
+  expect_that(kd$elements, equals (c(5, 8)))
+  expect_that(gk$value, equals (192647))
+  expect_that(head(gk$elements), equals (c(92, 574, 472, 80, 110, 537)))
+})
 
-# test optimized dynamic
+
 kd_optz <- knapsack_dynamic_optimized(knapsack_objects[1:8,], 3500)
-test_that('Test15',kd$value == kd_optz$value)
-test_that('Test16',kd$elements == kd_optz$elements)
+
+test_that("optimized dynamic returns correct values",{
+  expect_that(kd$value, equals (kd_optz$value))
+  expect_that(kd$elements, equals (kd_optz$elements))
+})
