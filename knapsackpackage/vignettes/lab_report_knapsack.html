@@ -69,33 +69,33 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <h3>1.1.2 How long time does it take to run the brute force algorithm for n=16 objects?</h3>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="kw">system.time</span>(<span class="kw">knapsack_brute_force</span>(knapsack_objects[<span class="dv">1</span>:<span class="dv">16</span>,], <span class="dv">5000</span>)))</code></pre>
 <pre><code>##    user  system elapsed 
-##   0.975   0.015   0.996</code></pre>
+##   0.894   0.009   0.905</code></pre>
 </div>
 <div id="how-long-time-does-it-take-to-run-the-dynamic-algorithm-for-n500-objects" class="section level3">
 <h3>1.1.3 How long time does it take to run the dynamic algorithm for n=500 objects?</h3>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="kw">system.time</span>(<span class="kw">knapsack_dynamic</span>(knapsack_objects[<span class="dv">1</span>:<span class="dv">5</span>,], <span class="dv">5000</span>)))</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="kw">system.time</span>(<span class="kw">knapsack_dynamic</span>(knapsack_objects[<span class="dv">1</span>:<span class="dv">500</span>,], <span class="dv">5000</span>)))</code></pre>
 <pre><code>##    user  system elapsed 
-##   0.584   0.005   0.591</code></pre>
+##  64.696   0.408  65.989</code></pre>
 </div>
 <div id="how-long-time-does-it-take-to-run-the-greedy-algorithm-for-n1000000-objects" class="section level3">
 <h3>1.1.4 How long time does it take to run the greedy algorithm for n=1000000 objects?</h3>
 <pre class="sourceCode r"><code class="sourceCode r">tmp =<span class="st"> </span><span class="kw">generate_knapsack_obj</span>(<span class="dv">1000000</span>)
 <span class="kw">print</span>(<span class="kw">system.time</span>(<span class="kw">knapsack_greedy</span>(tmp, <span class="dv">5000</span>)))</code></pre>
 <pre><code>##    user  system elapsed 
-##   2.476   0.050   2.529</code></pre>
+##   2.394   0.035   2.432</code></pre>
 </div>
 <div id="how-large-performance-gain-could-you-get-by-trying-to-improve-your-code" class="section level3">
 <h3>1.1.6 How large performance gain could you get by trying to improve your code?</h3>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="st">'Original knapsack dynamic:'</span>)</code></pre>
 <pre><code>## [1] &quot;Original knapsack dynamic:&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="kw">system.time</span>(<span class="kw">knapsack_dynamic</span>(knapsack_objects[<span class="dv">1</span>:<span class="dv">5</span>,], <span class="dv">5000</span>)))</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="kw">system.time</span>(<span class="kw">knapsack_dynamic</span>(knapsack_objects[<span class="dv">1</span>:<span class="dv">500</span>,], <span class="dv">5000</span>)))</code></pre>
 <pre><code>##    user  system elapsed 
-##   0.599   0.007   0.605</code></pre>
+##  63.265   0.384  63.775</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="st">'Optimized knapsack dynamic:'</span>)</code></pre>
 <pre><code>## [1] &quot;Optimized knapsack dynamic:&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="kw">system.time</span>(<span class="kw">knapsack_dynamic_optimized</span>(knapsack_objects[<span class="dv">1</span>:<span class="dv">5</span>,], <span class="dv">5000</span>)))</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="kw">system.time</span>(<span class="kw">knapsack_dynamic_optimized</span>(knapsack_objects[<span class="dv">1</span>:<span class="dv">500</span>,], <span class="dv">5000</span>)))</code></pre>
 <pre><code>##    user  system elapsed 
-##   0.002   0.000   0.002</code></pre>
+##   0.068   0.002   0.069</code></pre>
 </div>
 </div>
 
